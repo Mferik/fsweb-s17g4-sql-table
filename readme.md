@@ -86,34 +86,57 @@ Aşağıda tablolar ve şemaları verilmiş.
 
    1- öğrenci tablosuna 'sehir' alanı ekleyiniz.
 
+   ALTER TABLE ogrenci ADD COLUMN sehir VARCHAR(255)
 
    2- tablolarda veri olarak tarih geçen alanlarda veri tipini string yerine DateTime olarak ayarlayınız.
-
+ 
 
    3- öğrenci tablosuna 'dogum_yeri' alanı ekleyiniz ve default değerini 'Türkiye' yapınız.
+
+   ALTER TABLE ogrenci ADD COLUMN dogum_yeri VARCHAR(50) NOT NULL DEFAULT 'Türkiye'
 
 
    4- öğrenci tablosundan 'puan' alanını siliniz.
 
+   ALTER TABLE ogrenci DROP COLUMN puan
 
    5- öğrenciler tablosundaki kiz öğrencileri alarak kiz_ogrenciler tablosu oluşturunuz.
    
-   
+   CREATE TABLE kiz_ogrenciler as SELECT * FROM ogrenci where cinsiyet ="K"
+
    6- kiz_ogrenciler tablosunu siliniz.
 
+   DROP TABLE kiz_ogrenciler
 
    7- kiz_yurdu tablosu oluşturunuz(sadece 'ad' alanı olsun). 1 kayıt ekleyiniz.
       öğrenci tablosundaki kız öğrencileri kullanarak kiz_yurdunda_kalanlar tablosu oluşturunuz
 
+   CREATE TABLE kiz_yurdu (
+      ad VARCHAR(50)
+   )
+   INSERT INTO kiz_yurdu (ad) VALUES ("Eylül")
+
+   CREATE TABLE kiz_yurdunda_kalanlar as SELECT * FROM ogrenci where cinsiyet = "K"
 
    8- kiz_ogrenciler tablosunun adını kogrenciler olarak değiştiriniz
 
+   ALTER TABLE kiz_ogrenciler rename to kogrenciler
 
    9- yazar tablosundaki 'ad' alanının adını 'name' olarak güncelleyiniz.
 
+   ALTER TABLE yazar rename column yazarad to yazarname
 
    10- yazar tablosuna 'ulke' ve 'universite' alanları ekleyiniz 'ulke'nin default değeri 'Türkiye' olsun.
+
+   ALTER TABLE yazar ADD COLUMN VARCHAR(50) NOT NULL DEFAULT 'Türkiye'
+   ALTER TABLE yazar ADD COLUMN universite VARCHAR(50)
 
 
    11- tablo ilişkilerine 5'er tane örnek veriniz (1-1, 1-n, n-n)  
 
+   1-1 Örneği: araba tablosu - sigorta tablosu :Bir arabanın bir adet sigortası vardır. Bir sigorta bilgisi de bir arabaya aittir. 
+
+   1-n Örneği: Öğrenci-Okul : bir öğrenci bir okulda okuyabilir ancak bir okulda birden fazla öğrenci okuyabilir
+
+   n-n Örneği : Film ve Kategori tabloları : Bir film birden fazla kategoriye sahip olabilir aynı şekilde bir kategoride birden fazla film olabilir
+   
